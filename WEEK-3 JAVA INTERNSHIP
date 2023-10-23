@@ -1,0 +1,42 @@
+import java.util.*;
+
+class GFG {
+
+    public static void printStrength(String input) {
+        int n = input.length();
+        boolean hasLower = false, hasUpper = false,
+                hasDigit = false, specialChar = false;
+        Set<Character> set = new HashSet<>(
+                Arrays.asList('!', '@', '#', '$', '%', '^', '&',
+                        '*', '(', ')', '-', '+'));
+
+        for (char i : input.toCharArray()) {
+            if (Character.isLowerCase(i))
+                hasLower = true;
+            if (Character.isUpperCase(i))
+                hasUpper = true;
+            if (Character.isDigit(i))
+                hasDigit = true;
+            if (set.contains(i))
+                specialChar = true;
+        }
+
+        System.out.print("Strength of password: ");
+        if (hasDigit && hasLower && hasUpper && specialChar
+                && (n >= 8))
+            System.out.println("Strong");
+        else if ((hasLower || hasUpper || specialChar)
+                && (n >= 6))
+            System.out.println("Moderate");
+        else
+            System.out.println("Weak");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a password: ");
+        String input = scanner.nextLine();
+        scanner.close();
+        printStrength(input);
+    }
+}
